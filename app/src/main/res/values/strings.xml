@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Black Launcher</string>
+
+    <string-array name="font_size_options">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
+
+    <string-array name="font_style_options">
+        <item>Sans-serif</item>
+        <item>Serif</item>
+        <item>Monospace</item>
+    </string-array>
+
 </resources>

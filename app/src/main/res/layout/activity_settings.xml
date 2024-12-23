@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Font Size Selection -->
+    <TextView
+        android:id="@+id/fontSizeLabel"
+        android:layout_width="352dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="8dp"
+        android:text="Font Size"
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/fontSizeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:entries="@array/font_size_options" />
+
+    <!-- Font Style Selection -->
+    <TextView
+        android:id="@+id/fontStyleLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Font Style"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <Spinner
+        android:id="@+id/fontStyleSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:entries="@array/font_style_options"/>
+
+    <!-- Hide Specific Apps -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hide Apps"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <CheckBox
+        android:id="@+id/hideApp1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hide App 1" />
+
+    <CheckBox
+        android:id="@+id/hideApp2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hide App 2" />
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Preferences"
+        android:layout_marginTop="24dp" />
+</LinearLayout>

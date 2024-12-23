@@ -1,50 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<androidx.viewpager2.widget.ViewPager2
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/viewPager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
-    android:padding="16dp"
-    tools:context=".MainActivity">
-
-    <!-- Timer -->
-    <TextView
-        android:id="@+id/timerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="00:00:00"
-        android:textColor="#FFFFFF"
-        android:textSize="48sp"
-        android:textFontWeight="600"
-        android:fontFamily="sans-serif"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.217" />
-
-    <!-- Date -->
-    <TextView
-        android:id="@+id/dateText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/timerText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="YYYY-MM-DD"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:fontFamily="sans-serif"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.173" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:orientation="horizontal"
+    android:background="#000000" />

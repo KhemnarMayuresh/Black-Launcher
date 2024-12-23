@@ -2,7 +2,11 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.BlackLauncher" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> --><!-- Default text appearance -->
+        <item name="android:fontFamily">@font/jaini_purva</item>
+<!--        <item name="android:fontFamily">@font/caveat</item>-->
+<!--        <item name="android:fontFamily">@font/abel</item>-->
+
     </style>
 
     <style name="Theme.BlackLauncher" parent="Base.Theme.BlackLauncher" />

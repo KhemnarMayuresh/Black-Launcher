@@ -1,7 +1,14 @@
 package com.msk.blacklauncher;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -10,9 +17,18 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+// import fragments
+import androidx.viewpager2.widget.ViewPager2;
+
+import com.msk.blacklauncher.adapters.ViewPagerAdapter;
+import com.msk.blacklauncher.fragments.AppsFragment;
+import com.msk.blacklauncher.fragments.ChecklistAndNotesFragment;
+import com.msk.blacklauncher.fragments.HomeFragment;
+import com.msk.blacklauncher.model.AppModel;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,48 +40,81 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        // Initialize views
-        timeTextView = findViewById(R.id.timerText);
-        dateTextView = findViewById(R.id.dateText);
 
-        // Update the date and time
-        updateDateTime();
+        ViewPager2 viewPager = findViewById(R.id.viewPager);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(this);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        // Fetch installed apps and set adapter
+        List<AppModel> appsList = getInstalledApps(getApplicationContext());
+        setupViewPager(viewPager, adapter, appsList);
+        // Log the app names
+        StringBuilder appNames = new StringBuilder("Installed Apps: ");
+        for (AppModel app : appsList) {
+            appNames.append(app.getAppName()).append(", ");
+        }
+        Log.i("AppsFragment", appNames.toString());
+
+        adapter.addFragment(new ChecklistAndNotesFragment()); // Add apps list fragment here
+        adapter.addFragment(new HomeFragment()); // Add your home fragment here
+        adapter.addFragment(new AppsFragment()); // Add apps list fragment here
+
+        viewPager.setAdapter(adapter);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.viewPager), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // In MainActivity or the fragment manager for handling the swipe
+        viewPager.setCurrentItem(1); // Or use a gesture detector to trigger this fragment
+
+        // Replace "custom_font.ttf" with the actual font file in the assets folder
+//        FontOverride.setDefaultFont(this, "DEFAULT", "fonts/caveat.ttf");
     }
 
-    private void updateDateTime() {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                // Format date and time
-                SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.getDefault());
-                SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+    private void setupViewPager(ViewPager2 viewPager, ViewPagerAdapter adapter, List<AppModel> appsList) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("apps_list", new ArrayList<>(appsList));
 
-                // Get current date and time
-                Date now = new Date();
-                String currentDate = dateFormat.format(now);
-                String currentTime = timeFormat.format(now);
+        ChecklistAndNotesFragment notesFragment = new ChecklistAndNotesFragment();
+        HomeFragment homeFragment = new HomeFragment();
+        AppsFragment appsFragment = new AppsFragment();
+        appsFragment.setArguments(bundle);
 
-                // Update TextViews
-                dateTextView.setText(currentDate);
-                timeTextView.setText(currentTime);
+        adapter.addFragment(notesFragment);
+        adapter.addFragment(homeFragment);
+        adapter.addFragment(appsFragment);
 
-                // Update every second
-                handler.postDelayed(this, 1000);
+        viewPager.setAdapter(adapter);
+    }
+
+    private List<AppModel> getInstalledApps(Context context) {
+        List<AppModel> appsList = new ArrayList<>();
+        PackageManager packageManager = context.getPackageManager();
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Set<String> hiddenAppsList= preferences.getStringSet("hiddenAppsList",null);
+
+        // Get a list of all installed applications
+        List<ApplicationInfo> applications = packageManager.getInstalledApplications(PackageManager.GET_META_DATA);
+
+        for (ApplicationInfo appInfo : applications) {
+            // Filter for user-installed apps (non-system apps)
+            if ((appInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0 ||
+                    (appInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0 ||
+                (appInfo.loadLabel(packageManager).toString().equals("Settings"))) {
+                String appName = appInfo.loadLabel(packageManager).toString();
+                Drawable appIcon = appInfo.loadIcon(packageManager);
+                String packageName = appInfo.packageName;
+
+                appsList.add(new AppModel(appName, appIcon, packageName));
             }
-        });
-    }
+        }
 
-    //  On the left swipe of home screen shows an activity where we can create 2 section. The first section is the first half of the screen with a checklist of some text items and second section is the lower half of screen with notes section. where user can enter any task and note using keyboard.
+        // Sort the apps list alphabetically by app name
+        appsList.sort((app1, app2) -> app1.getAppName().compareToIgnoreCase(app2.getAppName()));
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        handler.removeCallbacksAndMessages(null); // Remove callbacks to avoid memory leaks
+        return appsList;
     }
 }
