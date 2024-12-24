@@ -1,27 +1,26 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#000000">
+    android:background="#000000"
+    android:orientation="vertical">
 
     <!-- Search bar (EditText) -->
     <EditText
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/search_bar_bg"
         android:hint="Search apps..."
         android:inputType="text"
-        android:textSize="18sp"
         android:padding="8dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/search_bar_bg"/>
+        android:textSize="18sp" />
 
     <!-- RecyclerView to display apps list -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:scrollbars="vertical" />
 </LinearLayout>

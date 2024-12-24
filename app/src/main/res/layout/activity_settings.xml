@@ -25,43 +25,89 @@
         android:id="@+id/fontStyleLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Font Style"
-        android:textSize="18sp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="8dp"
+        android:text="Font Style"
+        android:textSize="18sp" />
 
     <Spinner
         android:id="@+id/fontStyleSpinner"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:entries="@array/font_style_options"/>
-
-    <!-- Hide Specific Apps -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hide Apps"
-        android:textSize="18sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp" />
-
-    <CheckBox
-        android:id="@+id/hideApp1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hide App 1" />
-
-    <CheckBox
-        android:id="@+id/hideApp2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hide App 2" />
+        android:entries="@array/font_style_options" />
 
     <!-- Save Button -->
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save Preferences"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="24dp"
+        android:text="Save Preferences" />
+
+    <Button
+        android:id="@+id/setDefaultLauncherButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:padding="12dp"
+        android:text="Set as Default Launcher" />
+
+    <!-- Hide Specific Apps -->
+    <TextView
+        android:id="@+id/hideAppsTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:drawablePadding="8dp"
+        android:focusable="true"
+        android:text="Hide Apps"
+        android:textSize="18sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:id="@+id/hiddenAppsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- Checkboxes for apps will be added dynamically here -->
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Hide Specific Apps Logo -->
+    <TextView
+        android:id="@+id/hideAppsLogoTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:drawablePadding="8dp"
+        android:focusable="true"
+        android:text="Hide Apps Logo"
+        android:textSize="18sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:id="@+id/hiddenAppsLogoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- Checkboxes for apps will be added dynamically here -->
+        </LinearLayout>
+
+    </ScrollView>
+
 </LinearLayout>

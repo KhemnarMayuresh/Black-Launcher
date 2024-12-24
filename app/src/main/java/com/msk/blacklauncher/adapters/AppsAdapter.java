@@ -11,8 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.msk.blacklauncher.model.AppModel;
 import com.msk.blacklauncher.R;
+import com.msk.blacklauncher.model.AppModel;
 
 import java.util.List;
 
@@ -38,10 +38,17 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.AppViewHolder>
         AppModel app = appsList.get(position);
 
         holder.appName.setText(app.getAppName());
-        holder.appIcon.setImageDrawable(app.getAppIcon());
+
+        //----------------- Conditionally show/hide app icon -----------------
+        if (!app.isIconVisible()) {
+            holder.appIcon.setVisibility(View.VISIBLE);
+            holder.appIcon.setImageDrawable(app.getAppIcon());
+        } else {
+            holder.appIcon.setVisibility(View.GONE);
+        }
 
         holder.itemView.setOnClickListener(v -> {
-            // Launch app on click
+            //----------------- Launch app on click -----------------
             Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(app.getPackageName());
             if (launchIntent != null) {
                 context.startActivity(launchIntent);

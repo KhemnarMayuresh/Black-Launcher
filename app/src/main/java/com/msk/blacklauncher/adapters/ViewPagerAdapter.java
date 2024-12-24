@@ -20,6 +20,14 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
         fragmentList.add(fragment);
     }
 
+    public void updateFragments(int position, Fragment fragment) {
+        fragmentList.set(position, fragment);
+    }
+
+    public void removeAllFragments() {
+        fragmentList.clear();
+    }
+
     @NonNull
     @Override
     public Fragment createFragment(int position) {

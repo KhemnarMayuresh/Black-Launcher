@@ -21,20 +21,20 @@ import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
+    private final Handler handler = new Handler();
     private TextView timeTextView, dateTextView;
-    private Handler handler = new Handler();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        // Initialize views
+        //----------------- Initialize views -----------------
         timeTextView = view.findViewById(R.id.timerText);
         dateTextView = view.findViewById(R.id.dateText);
 
-        // Update the date and time
+        //----------------- Update the date and time -----------------
         updateDateTime();
 
-        // Add long-press listener to open settings
+        //----------------- Add long-press listener to open settings -----------------
         timeTextView.setOnLongClickListener(v -> {
             openSettings();
             return true;
@@ -46,20 +46,20 @@ public class HomeFragment extends Fragment {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                // Format date and time
+                //----------------- Format date and time -----------------
                 SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.getDefault());
                 SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
 
-                // Get current date and time
+                //----------------- Get current date and time -----------------
                 Date now = new Date();
                 String currentDate = dateFormat.format(now);
                 String currentTime = timeFormat.format(now);
 
-                // Update TextViews
+                //----------------- Update TextViews -----------------
                 dateTextView.setText(currentDate);
                 timeTextView.setText(currentTime);
 
-                // Update every second
+                //----------------- Update every second -----------------
                 handler.postDelayed(this, 1000);
             }
         });

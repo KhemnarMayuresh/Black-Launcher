@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <!-- Checklist Section (Top Half) -->
     <androidx.recyclerview.widget.RecyclerView
@@ -16,19 +16,19 @@
         android:id="@+id/notesEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/search_bar_bg"
+        android:gravity="top|start"
         android:hint="Enter your note here..."
         android:inputType="textMultiLine"
-        android:gravity="top|start"
         android:maxLines="5"
-        android:padding="8dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/search_bar_bg"/>
+        android:padding="8dp" />
 
     <ImageButton
         android:id="@+id/addChecklistItemButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_input_add"
+        android:layout_gravity="center"
         android:contentDescription="Add checklist item"
-        android:layout_gravity="center" />
+        android:src="@android:drawable/ic_input_add" />
 </LinearLayout>

@@ -11,11 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
+        android:fontFamily="sans-serif"
         android:text="00:00:00"
         android:textColor="#FFFFFF"
-        android:textSize="48sp"
         android:textFontWeight="600"
-        android:fontFamily="sans-serif"/>
+        android:textSize="48sp" />
 
     <!-- Date -->
     <TextView
@@ -25,9 +25,9 @@
         android:layout_below="@id/timerText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
         android:text="YYYY-MM-DD"
         android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:fontFamily="sans-serif" />
+        android:textSize="24sp" />
 
 </RelativeLayout>

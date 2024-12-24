@@ -30,19 +30,19 @@ public class ChecklistAndNotesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_checklist_and_notes, container, false);
 
-        // Initialize UI components
+        //----------------- Initialize UI components -----------------
         checklistRecyclerView = view.findViewById(R.id.checklistRecyclerView);
         notesEditText = view.findViewById(R.id.notesEditText);
         addChecklistItemButton = view.findViewById(R.id.addChecklistItemButton);
 
         checklistItems = new ArrayList<>();
 
-        // Set up the RecyclerView for the checklist
+        //----------------- Set up the RecyclerView for the checklist -----------------
         checklistAdapter = new ChecklistAdapter(checklistItems);
         checklistRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         checklistRecyclerView.setAdapter(checklistAdapter);
 
-        // Add new item to the checklist
+        //----------------- Add new item to the checklist -----------------
         addChecklistItemButton.setOnClickListener(v -> {
             String newItem = notesEditText.getText().toString().trim();
             if (!TextUtils.isEmpty(newItem)) {

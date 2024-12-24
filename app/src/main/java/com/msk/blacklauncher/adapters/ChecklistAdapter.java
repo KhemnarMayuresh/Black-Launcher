@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ChecklistViewHolder> {
 
-    private ArrayList<String> checklistItems;
+    private final ArrayList<String> checklistItems;
 
     public ChecklistAdapter(ArrayList<String> checklistItems) {
         this.checklistItems = checklistItems;
@@ -31,14 +31,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Chec
         String item = checklistItems.get(position);
         holder.checklistItemText.setText(item);
 
-        // Handle item editing
-        holder.checklistItemText.setOnClickListener(v -> {
-            // Open editing dialog or change item
-            // For simplicity, directly modify the text here (you can implement a dialog for real-time editing)
-            holder.checklistItemText.setEnabled(true); // Enable editing
-        });
-
-        // Handle item deletion
+        //----------------- Handle item deletion -----------------
         holder.deleteButton.setOnClickListener(v -> {
             checklistItems.remove(position);
             notifyItemRemoved(position);
