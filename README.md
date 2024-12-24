@@ -2,9 +2,9 @@
 
 BlackLauncher is a minimalist and customizable Android launcher designed for simplicity and productivity. With a sleek black-themed UI, it offers essential features such as font customization, app hiding, and the ability to set it as the default launcher. This project aims to provide a lightweight launcher with user-centric functionality.
 
-✶ Made with minimalism in mind.✶
-✶ Stay focused using the Black launcher.✶
-✶ Bit Launcher helps you use your Phone less and live in the moment✶
+*✶ Made with minimalism in mind.*
+*✶ Stay focused using the Black launcher.*
+*✶ Bit Launcher helps you use your Phone less and live in the moment*
 
 ## Features
 

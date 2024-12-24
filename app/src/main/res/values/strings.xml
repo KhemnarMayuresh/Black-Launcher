@@ -8,9 +8,9 @@
     </string-array>
 
     <string-array name="font_style_options">
-        <item>Sans-serif</item>
-        <item>Serif</item>
-        <item>Monospace</item>
+        <item>jaini_purva</item>
+        <item>caveat</item>
+        <item>abel</item>
     </string-array>
 
 </resources>
