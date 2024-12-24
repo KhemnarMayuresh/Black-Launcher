@@ -31,16 +31,15 @@ We respect your privacy. We don't track personally identifiable data and allow f
 
 ## Screenshots
 
-## Screenshots
-
-<img src="./screenshots/screenshot01.png" alt="Home Page" width="200" />
-<img src="./screenshots/screenshot02.png" alt="All Apps" width="200" />
-<img src="./screenshots/screenshot03.png" alt="Apps Without Logos" width="200" />
-<img src="./screenshots/screenshot04.png" alt="Notes Page" width="200" />
-<img src="./screenshots/screenshot05.png" alt="Settings" width="200" />
-<img src="./screenshots/screenshot06.png" alt="Settings Hide Apps" width="200" />
-<img src="./screenshots/screenshot07.png" alt="Settings Hide Apps Logo" width="200" />
-
+<div style="display: flex; flex-wrap: nowrap; gap: 10px; overflow-x: auto;">
+  <img src="./screenshots/screenshot01.png" alt="Home Page" width="200" />
+  <img src="./screenshots/screenshot02.png" alt="All Apps" width="200" />
+  <img src="./screenshots/screenshot03.png" alt="Apps Without Logos" width="200" />
+  <img src="./screenshots/screenshot04.png" alt="Notes Page" width="200" />
+  <img src="./screenshots/screenshot05.png" alt="Settings" width="200" />
+  <img src="./screenshots/screenshot06.png" alt="Settings Hide Apps" width="200" />
+  <img src="./screenshots/screenshot07.png" alt="Settings Hide Apps Logo" width="200" />
+</div>
 
 ## Installation
 
