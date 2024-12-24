@@ -31,13 +31,16 @@ We respect your privacy. We don't track personally identifiable data and allow f
 
 ## Screenshots
 
-![screenshot_1:Home Page](./screenshots/screenshot01.png)
-![screenshot_2:All Apps](./screenshots/screenshot02.png)
-![screenshot_3:Apps Without Logos](./screenshots/screenshot03.png)
-![screenshot_4:Notes Page](./screenshots/screenshot04.png)
-![screenshot_5:Settings](./screenshots/screenshot05.png)
-![screenshot_6:Settings Hide Apps](./screenshots/screenshot06.png)
-![screenshot_7:Settings Hide Apps Logo](./screenshots/screenshot07.png)
+## Screenshots
+
+<img src="./screenshots/screenshot01.png" alt="Home Page" width="200" />
+<img src="./screenshots/screenshot02.png" alt="All Apps" width="200" />
+<img src="./screenshots/screenshot03.png" alt="Apps Without Logos" width="200" />
+<img src="./screenshots/screenshot04.png" alt="Notes Page" width="200" />
+<img src="./screenshots/screenshot05.png" alt="Settings" width="200" />
+<img src="./screenshots/screenshot06.png" alt="Settings Hide Apps" width="200" />
+<img src="./screenshots/screenshot07.png" alt="Settings Hide Apps Logo" width="200" />
+
 
 ## Installation
 
