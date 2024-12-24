@@ -1,8 +1,6 @@
 package com.msk.blacklauncher;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,8 +21,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final Handler handler = new Handler();
-    private TextView timeTextView, dateTextView;
     private ViewPager2 viewPager;
     private ViewPagerAdapter adapter;
 

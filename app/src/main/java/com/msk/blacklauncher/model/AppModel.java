@@ -20,12 +20,14 @@ public class AppModel implements Parcelable {
     private final Drawable appIcon;
     private final String packageName;
     private boolean isIconVisible;
+    private boolean isDelay;
 
-    public AppModel(String appName, Drawable appIcon, String packageName, boolean isIconVisible) {
+    public AppModel(String appName, Drawable appIcon, String packageName, boolean isIconVisible, boolean isDelay) {
         this.appName = appName;
         this.appIcon = appIcon;
         this.packageName = packageName;
         this.isIconVisible = isIconVisible;
+        this.isDelay = isDelay;
     }
 
     //----------------- Parcelable implementation -----------------
@@ -55,6 +57,10 @@ public class AppModel implements Parcelable {
     //----------------- Setter Methods -----------------
     public void setIconVisible(boolean iconVisible) {
         isIconVisible = iconVisible;
+    }
+
+    public boolean isDelay() {
+        return isDelay;
     }
 
     @Override

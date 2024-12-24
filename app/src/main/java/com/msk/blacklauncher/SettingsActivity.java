@@ -25,22 +25,13 @@ public class SettingsActivity extends AppCompatActivity {
 
     private SharedPreferences preferences;
     private Spinner fontSizeSpinner, fontStyleSpinner;
-    private LinearLayout hiddenAppsLayout, hiddenAppsLogoLayout;
-    private TextView hideAppsTextView, hideAppsLogoTextView;
-    private boolean isHiddenAppsVisible = false, isHiddenAppsLogoVisible = false;
+    private LinearLayout hiddenAppsLayout, hiddenAppsLogoLayout, delayAppsLayout;
+    private TextView hideAppsTextView, hideAppsLogoTextView, delayAppsTextView;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        setContentView(R.layout.activity_settings);
-
-
+    private void initializeViews() {
         //----------------- Initialize views-----------------
         fontSizeSpinner = findViewById(R.id.fontSizeSpinner);
         fontStyleSpinner = findViewById(R.id.fontStyleSpinner);
-        Button saveButton = findViewById(R.id.saveButton);
         // -----------------Hide App components -----------------
         hiddenAppsLayout = findViewById(R.id.hiddenAppsLayout);
         hiddenAppsLayout.setVisibility(View.GONE); //Hide Apps default not visible
@@ -49,13 +40,10 @@ public class SettingsActivity extends AppCompatActivity {
         hiddenAppsLogoLayout = findViewById(R.id.hiddenAppsLogoLayout);
         hiddenAppsLogoLayout.setVisibility(View.GONE); //Hide Apps Logo default not visible
         hideAppsLogoTextView = findViewById(R.id.hideAppsLogoTextView);
-        //----------------- Fetch and display apps dynamically-----------------
-        List<AppModel> appsList = AppUtils.getInstalledApps(this, false);
-        displayAppCheckboxes(appsList);
-        displayAppLogosCheckboxes(appsList);
-
-        //----------------- Load current preferences-----------------
-        loadPreferences();
+        //----------------- Delay App Logo components -----------------
+        delayAppsLayout = findViewById(R.id.delayAppsLayout);
+        delayAppsLayout.setVisibility(View.GONE); //Hide Apps Logo default not visible
+        delayAppsTextView = findViewById(R.id.delayAppsTextView);
 
         //----------------- Default Launcher button -----------------
         Button setDefaultLauncherButton = findViewById(R.id.setDefaultLauncherButton);
@@ -66,78 +54,75 @@ public class SettingsActivity extends AppCompatActivity {
                 setDefaultLauncher();
             }
         });
+
         //----------------- Set up button to save preferences-----------------
+        Button saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(v -> savePreferences());
+    }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        setContentView(R.layout.activity_settings);
+
+        // Initialize views
+        initializeViews();
+
+        //----------------- Fetch and display apps dynamically-----------------
+        List<AppModel> appsList = AppUtils.getInstalledApps(this, false);
+        setupCheckboxes(appsList, hiddenAppsLayout, "isAppHidden");
+
+        List<AppModel> VisibleAppsList = AppUtils.getInstalledApps(this, false);
+        setupCheckboxes(VisibleAppsList, hiddenAppsLogoLayout, "isLogoVisible");
+        setupCheckboxes(VisibleAppsList, delayAppsLayout, "isDelayApp");
+        //----------------- Load current preferences-----------------
+        loadPreferences();
         //----------------- Set up font size spinner-----------------
-        ArrayAdapter<CharSequence> fontSizeAdapter = ArrayAdapter.createFromResource(
-                this,
-                R.array.font_size_options,
-                android.R.layout.simple_spinner_item
-        );
-        fontSizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        fontSizeSpinner.setAdapter(fontSizeAdapter);
-
+        setupSpinner(fontSizeSpinner, R.array.font_size_options);
         //----------------- Set up font style spinner-----------------
-        ArrayAdapter<CharSequence> fontStyleAdapter = ArrayAdapter.createFromResource(
-                this,
-                R.array.font_style_options,
-                android.R.layout.simple_spinner_item
-        );
-        fontStyleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        fontStyleSpinner.setAdapter(fontStyleAdapter);
+        setupSpinner(fontStyleSpinner, R.array.font_style_options);
 
         //----------------- Set up toggle for hidden apps -----------------
-        hideAppsTextView.setOnClickListener(v -> toggleHiddenAppsSection());
+        setupToggle(hideAppsTextView, hiddenAppsLayout);
         //----------------- Set up toggle for hidden apps Logo -----------------
-        hideAppsLogoTextView.setOnClickListener(v -> toggleHiddenAppsLogoSection());
+        setupToggle(hideAppsLogoTextView, hiddenAppsLogoLayout);
+        //----------------- Set up toggle for hidden apps Logo -----------------
+        setupToggle(delayAppsTextView, delayAppsLayout);
     }
 
-    private void toggleHiddenAppsSection() {
-        isHiddenAppsVisible = !isHiddenAppsVisible;
-        hiddenAppsLayout.setVisibility(isHiddenAppsVisible ? View.VISIBLE : View.GONE);
-//        hideAppsTextView.setCompoundDrawablesWithIntrinsicBounds(
-//                0, 0, isHiddenAppsVisible ? R.drawable.ic_arrow_up : R.drawable.ic_arrow_down, 0
-//        );
+    private void setupSpinner(Spinner spinner, int arrayResource) {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                arrayResource,
+                android.R.layout.simple_spinner_item
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
 
-    private void toggleHiddenAppsLogoSection() {
-        isHiddenAppsLogoVisible = !isHiddenAppsLogoVisible;
-        hiddenAppsLogoLayout.setVisibility(isHiddenAppsLogoVisible ? View.VISIBLE : View.GONE);
-//        hideAppsLogoTextView.setCompoundDrawablesWithIntrinsicBounds(
-//                0, 0, isHiddenAppsLogoVisible ? R.drawable.ic_arrow_up : R.drawable.ic_arrow_down, 0
-//        );
+    private void setupToggle(TextView textView, LinearLayout layout) {
+        textView.setOnClickListener(v -> {
+            boolean isVisible = layout.getVisibility() == View.VISIBLE;
+            layout.setVisibility(isVisible ? View.GONE : View.VISIBLE);
+            textView.setCompoundDrawablesWithIntrinsicBounds(
+                    0, 0, isVisible ? R.drawable.ic_arrow_down : R.drawable.ic_arrow_up, 0
+            );
+        });
     }
 
-    private void displayAppCheckboxes(List<AppModel> appsList) {
+    private void setupCheckboxes(List<AppModel> appsList, LinearLayout layout, String preferenceKeyPrefix) {
         for (AppModel app : appsList) {
-            //----------------- Create a checkbox for each app -----------------
             CheckBox checkBox = new CheckBox(this);
             checkBox.setText(app.getAppName());
-            checkBox.setChecked(preferences.getBoolean("isAppHidden:" + app.getPackageName(), false)); // Load saved state
+            checkBox.setChecked(preferences.getBoolean(preferenceKeyPrefix + ":" + app.getPackageName(), false));
 
-            // -----------------Set a listener to save state in SharedPreferences -----------------
-            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                saveAppHiddenState("isAppHidden:" + app.getPackageName(), isChecked);
-            });
+            checkBox.setOnCheckedChangeListener((buttonView, isChecked) ->
+                    saveAppHiddenState(preferenceKeyPrefix + ":" + app.getPackageName(), isChecked)
+            );
 
-            hiddenAppsLayout.addView(checkBox);
-        }
-    }
-
-    private void displayAppLogosCheckboxes(List<AppModel> appsList) {
-        for (AppModel app : appsList) {
-            //----------------- Create a checkbox for each app -----------------
-            CheckBox checkBox = new CheckBox(this);
-            checkBox.setText(app.getAppName());
-            checkBox.setChecked(preferences.getBoolean("isLogoVisible:" + app.getPackageName(), false)); // Load saved state
-
-            //----------------- Set a listener to save state in SharedPreferences -----------------
-            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                saveAppHiddenState("isLogoVisible:" + app.getPackageName(), isChecked);
-            });
-
-            hiddenAppsLogoLayout.addView(checkBox);
+            layout.addView(checkBox);
         }
     }
 

@@ -110,4 +110,32 @@
 
     </ScrollView>
 
+    <!-- Delay Specific Apps -->
+    <TextView
+        android:id="@+id/delayAppsTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:drawablePadding="8dp"
+        android:focusable="true"
+        android:text="Delay Apps"
+        android:textSize="18sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:id="@+id/delayAppsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- Checkboxes for apps will be added dynamically here -->
+        </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>

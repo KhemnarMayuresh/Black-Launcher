@@ -35,7 +35,15 @@ public class AppUtils {
                 String packageName = appInfo.packageName;
                 Drawable appIcon = appInfo.loadIcon(packageManager);
 
-                appsList.add(new AppModel(appName, appIcon, packageName, preferences.getBoolean("isLogoVisible:" + appInfo.packageName, false)));
+                appsList.add(
+                        new AppModel(
+                                appName,
+                                appIcon,
+                                packageName,
+                                preferences.getBoolean("isLogoVisible:" + appInfo.packageName, false),
+                                preferences.getBoolean("isDelayApp:" + appInfo.packageName, false)
+                        )
+                );
             }
         }
 
