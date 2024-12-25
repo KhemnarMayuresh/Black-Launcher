@@ -47,6 +47,7 @@ We respect your privacy. We don't track personally identifiable data and allow f
   <img src="./screenshots/screenshot05.png" alt="Settings" width="200" />
   <img src="./screenshots/screenshot06.png" alt="Settings Hide Apps" width="200" />
   <img src="./screenshots/screenshot07.png" alt="Settings Hide Apps Logo" width="200" />
+  <img src="./screenshots/screenshot08.png" alt="Settings Hide Apps Logo" width="200" />
 </div>
 
 ## Installation
