@@ -36,14 +36,6 @@ public class MainActivity extends AppCompatActivity {
         //----------------- Fetch installed apps and set adapter-----------------
         List<AppModel> appsList = AppUtils.getInstalledApps(getApplicationContext(), true);
         setupViewPager(viewPager, adapter, appsList);
-        //----------------- Log the app names-----------------
-        /*
-        StringBuilder appNames = new StringBuilder("Installed Apps: ");
-        for (AppModel app : appsList) {
-            appNames.append(app.getAppName()).append(": "+app.isIconVisible()+", ");
-        }
-        Log.i("AppsFragment", appNames.toString());
-        */
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.viewPager), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -52,10 +44,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //----------------- In MainActivity or the fragment manager for handling the swipe -----------------
-        viewPager.setCurrentItem(1); // Or use a gesture detector to trigger this fragment
-
-        //----------------- Replace "custom_font.ttf" with the actual font file in the assets folder -----------------
-        // FontOverride.setDefaultFont(this, "DEFAULT", "fonts/caveat.ttf");
+        viewPager.setCurrentItem(1);
     }
 
     @Override
@@ -76,9 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
         //----------------- In MainActivity or the fragment manager for handling the swipe -----------------
         viewPager.setCurrentItem(1);
-
-        //----------------- Replace "custom_font.ttf" with the actual font file in the assets folder -----------------
-        // FontOverride.setDefaultFont(this, "DEFAULT", "fonts/caveat.ttf");
     }
 
     private void setupViewPager(ViewPager2 viewPager, ViewPagerAdapter adapter, List<AppModel> appsList) {
