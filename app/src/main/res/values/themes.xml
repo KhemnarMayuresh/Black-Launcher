@@ -10,5 +10,7 @@
 
     </style>
 
-    <style name="Theme.BlackLauncher" parent="Base.Theme.BlackLauncher" />
+    <style name="Theme.BlackLauncher" parent="Base.Theme.BlackLauncher">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
 </resources>

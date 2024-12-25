@@ -1,5 +1,6 @@
 package com.msk.blacklauncher.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppUtils {
+    @SuppressLint("NewApi")
     public static List<AppModel> getInstalledApps(Context context, boolean excludeHidden) {
         //----------------- Combine logic from MainActivity and SettingsActivity -----------------
         List<AppModel> appsList = new ArrayList<>();

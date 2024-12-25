@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Black Launcher</string>
+    <string name="app_name">Simply Launcher</string>
 
     <string-array name="font_size_options">
         <item>Small</item>
