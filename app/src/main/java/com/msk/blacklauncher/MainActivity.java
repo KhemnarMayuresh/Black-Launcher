@@ -1,5 +1,6 @@
 package com.msk.blacklauncher;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -65,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
 
         //----------------- In MainActivity or the fragment manager for handling the swipe -----------------
         viewPager.setCurrentItem(1);
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        //----------------- In MainActivity on backpress do nothing -----------------
     }
 
     private void setupViewPager(ViewPager2 viewPager, ViewPagerAdapter adapter, List<AppModel> appsList) {
